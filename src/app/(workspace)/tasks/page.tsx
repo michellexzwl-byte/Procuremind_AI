@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Download, FileUp, RefreshCcw, Sparkles } from "lucide-react";
@@ -18,7 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 const taskTypes = ["招标文件生成", "采购申请生成", "供应商比价摘要", "合同要点提炼", "会议纪要生成", "邮件 / 汇报文案生成", "降本分析报告", "效率分析报告"];
 
-export default function TasksPage() {
+function TasksPageContent() {
   const searchParams = useSearchParams();
   const [active, setActive] = useState(taskTypes[0]);
   const [loading, setLoading] = useState(false);
@@ -228,5 +228,13 @@ export default function TasksPage() {
         ))}
       </Tabs>
     </div>
+  );
+}
+
+export default function TasksPage() {
+  return (
+    <Suspense fallback={<div className="rounded-lg border bg-muted/30 p-6 text-sm text-muted-foreground">正在加载任务助手...</div>}>
+      <TasksPageContent />
+    </Suspense>
   );
 }

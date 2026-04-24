@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Paperclip, Send, WandSparkles } from "lucide-react";
 import { toast } from "sonner";
@@ -22,7 +22,7 @@ const modes = [
   { key: "decision", label: "决策分析" }
 ] as const;
 
-export default function ChatPage() {
+function ChatPageContent() {
   const [messages, setMessages] = useState<Message[]>(recentChats);
   const [input, setInput] = useState("");
   const router = useRouter();
@@ -213,5 +213,13 @@ export default function ChatPage() {
         </Card>
       </div>
     </div>
+  );
+}
+
+export default function ChatPage() {
+  return (
+    <Suspense fallback={<div className="rounded-lg border bg-muted/30 p-6 text-sm text-muted-foreground">正在加载对话工作台...</div>}>
+      <ChatPageContent />
+    </Suspense>
   );
 }

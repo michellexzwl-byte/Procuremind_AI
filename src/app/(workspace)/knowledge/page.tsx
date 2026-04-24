@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { FileDown, FileSearch, Highlighter, Loader2, Paperclip, Search } from "lucide-react";
@@ -15,7 +15,7 @@ import { ChatMessage as Message } from "@/types";
 
 const categories = ["制度库", "流程库", "模板库", "合同条款库", "供应商规则库", "历史案例库"];
 
-export default function KnowledgePage() {
+function KnowledgePageContent() {
   const searchParams = useSearchParams();
   const [messages, setMessages] = useState<Message[]>(knowledgeChats);
   const [keyword, setKeyword] = useState("");
@@ -223,5 +223,13 @@ export default function KnowledgePage() {
         </Card>
       </div>
     </div>
+  );
+}
+
+export default function KnowledgePage() {
+  return (
+    <Suspense fallback={<div className="rounded-lg border bg-muted/30 p-6 text-sm text-muted-foreground">正在加载知识助手...</div>}>
+      <KnowledgePageContent />
+    </Suspense>
   );
 }

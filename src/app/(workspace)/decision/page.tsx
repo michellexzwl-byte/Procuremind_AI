@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AlertTriangle, Lightbulb } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -36,7 +36,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const themes = ["供应商分析", "报价对比", "合同风险", "采购策略建议", "风险预警", "成本分析", "效率分析"];
 
-export default function DecisionPage() {
+function DecisionPageContent() {
   const [active, setActive] = useState(themes[0]);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -437,5 +437,13 @@ export default function DecisionPage() {
         ))}
       </Tabs>
     </div>
+  );
+}
+
+export default function DecisionPage() {
+  return (
+    <Suspense fallback={<div className="rounded-lg border bg-muted/30 p-6 text-sm text-muted-foreground">正在加载决策助手...</div>}>
+      <DecisionPageContent />
+    </Suspense>
   );
 }
