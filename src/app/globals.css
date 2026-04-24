@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 217 33% 97%;
+  --foreground: 224 26% 15%;
+  --card: 0 0% 100%;
+  --card-foreground: 224 26% 15%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 224 26% 15%;
+  --primary: 222 78% 45%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 224 26% 15%;
+  --muted: 210 30% 95%;
+  --muted-foreground: 221 12% 42%;
+  --accent: 209 100% 96%;
+  --accent-foreground: 224 26% 15%;
+  --destructive: 0 70% 50%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 216 25% 88%;
+  --input: 216 25% 88%;
+  --ring: 222 78% 45%;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: 224 32% 10%;
+  --foreground: 210 40% 96%;
+  --card: 224 28% 14%;
+  --card-foreground: 210 40% 96%;
+  --popover: 224 28% 14%;
+  --popover-foreground: 210 40% 96%;
+  --primary: 216 92% 62%;
+  --primary-foreground: 224 45% 10%;
+  --secondary: 223 19% 20%;
+  --secondary-foreground: 210 40% 96%;
+  --muted: 223 19% 20%;
+  --muted-foreground: 215 20% 70%;
+  --accent: 223 24% 24%;
+  --accent-foreground: 210 40% 96%;
+  --destructive: 0 65% 52%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 223 16% 24%;
+  --input: 223 16% 24%;
+  --ring: 216 92% 62%;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  background-image: radial-gradient(circle at 20% 0%, rgba(59, 130, 246, 0.08), transparent 45%),
+    radial-gradient(circle at 90% 10%, rgba(6, 182, 212, 0.06), transparent 40%);
+}
